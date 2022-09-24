@@ -18,7 +18,6 @@ import { exec } from '@actions/exec'
     await mkdirP('./github/workspace/.wrangler')
   
     const version = getInput('wranglerVersion')
-
     if (!version) await exec('npm i -g wrangler')
     else await exec(`npm i -g "wrangler@${version}"`)
   } catch (error: any) {
