@@ -7,12 +7,6 @@ import { exec } from '@actions/exec'
     exportVariable('HOME', './github/workspace')
     exportVariable('WRANGLER_HOME', './github/workspace')
 
-    await mkdirP('./github/workspace/.wrangler')
-  
-    const version = getInput('wranglerVersion')
-    if (!version) await exec('npm i -g wrangler')
-    else await exec(`npm i -g "wrangler@${version}"`)
-
     const apiToken = getInput('apiToken')
     exportVariable('CLOUDFLARE_API_TOKEN', apiToken)
 
@@ -21,11 +15,12 @@ import { exec } from '@actions/exec'
 
     exportVariable('API_CREDENTIALS', 'API Token')
 
-    const workingDirectory = getInput('workingDirectory')
+    await mkdirP('./github/workspace/.wrangler')
+  
+    const version = getInput('wranglerVersion')
 
-    await exec('wrangler publish', undefined, {
-      cwd: `./${workingDirectory}`
-    })
+    if (!version) await exec('npm i -g wrangler')
+    else await exec(`npm i -g "wrangler@${version}"`)
   } catch (error: any) {
     setFailed(error)
   }
