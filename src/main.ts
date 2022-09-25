@@ -18,9 +18,11 @@ import { saveCache, restoreCache } from '@actions/cache'
 
     const key = await restoreCache([`${lib}/wrangler`], `wrangler-${version}`)
     
-    if (key && !version) await exec('npm i -g wrangler')
-    else await exec(`npm i -g "wrangler@${version}"`)
-
+    if (!key) {
+      if (version) await exec(`npm i -g "wrangler@${version}"`)
+      else await exec('npm i -g wrangler')
+    }
+    
     await exec('echo $HOME')
     await exec('whereis wrangler')
     
