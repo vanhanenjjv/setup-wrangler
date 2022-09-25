@@ -19,6 +19,7 @@ import { saveCache, restoreCache } from '@actions/cache'
     if (key && !version) await exec('npm i -g wrangler')
     else await exec(`npm i -g "wrangler@${version}"`)
 
+    await exec('echo $HOME')
     await exec('whereis wrangler')
     
     if (!key) await saveCache(['/usr/local/bin/wrangler'], `wrangler-${version}`)
