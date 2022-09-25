@@ -4,9 +4,6 @@ import { exec } from '@actions/exec'
 
 (async () => {
   try {
-    exportVariable('HOME', './github/workspace')
-    exportVariable('WRANGLER_HOME', './github/workspace')
-
     const apiToken = getInput('apiToken')
     exportVariable('CLOUDFLARE_API_TOKEN', apiToken)
 
