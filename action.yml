@@ -2,7 +2,7 @@ name: "Wrangler"
 description: "Wrangler Action"
 runs:
   using: "node16"
-  main: "dist/main.js"
+  main: "main.js"
 inputs:
   apiToken:
     description: "Cloudflare API Token"
